@@ -1,6 +1,7 @@
 # HDT 4: suites de Bruno contra un API
 
-Asigna: jueves 24 de septiembre. 
+Asigna: jueves 24 de septiembre.
+Entrega: Martes 28 de sept 23:59. 
 ## El API
 
 ```bash
@@ -8,7 +9,7 @@ uv run api.py                      # http://127.0.0.1:8000
 DEMO_API_KEY=s3cret uv run api.py  # las escrituras piden X-API-Key
 ```
 
-El estado vive en memoria. `POST /reset` lo devuelve a los tres libros iniciales.
+El estado vive en memoria. `POST /reset` lo devuelve a los tres libros iniciales. Cada vez que apagas el API se resetea. 
 
 | Método | Ruta | Éxito | Error |
 |---|---|---|---|
@@ -38,23 +39,16 @@ El estado vive en memoria. `POST /reset` lo devuelve a los tres libros iniciales
 
 ## Qué se entrega
 
-Una carpeta `bruno/` con tres colecciones, cada una con su `bruno.json` y un entorno `local`:
+Una carpeta `bruno/` con las 2 colecciones, cada una con su `bruno.json` y un environment `local`:
 
 | Colección | Contenido |
 |---|---|
 | `smoke/` | 3 a 5 requests. El servicio responde y los caminos principales viven. |
-| `regresion/` | Entre 10 y 15 requests diseñados con técnicas de ISTQB. Al menos tres técnicas distintas entre partición de equivalencia, valores frontera, tabla de decisión y transición de estados. |
+| `regresion/` | Entre 10 y 15 requests diseñados con técnicas de ISTQB. |
 
 Reglas para las tres:
 
 - Cada colección abre con `POST /reset` y pasa corrida dos veces seguidas.
 - Cada request lleva al menos una aserción, en `assert` o en `tests`.
-- Cada request de `regresion/` lleva un bloque `docs` con la técnica, la partición o el valor que cubre, y el resultado esperado según la tabla de arriba.
-- La llave de API, si se usa, sale de `process.env` y no queda en el repositorio.
+- En la regresion poner con un comment la técnica de testing de ISTQB utilizada. 
 
-Evidencia, dentro del mismo ZIP:
-
-- `junit-smoke.xml`, `junit-integracion.xml` y `junit-regresion.xml`, generados con `bru run --env local --reporter-junit junit-<suite>.xml` desde la raíz de cada colección.
-- `tecnicas.md`: una tabla con una fila por request de `regresion/` (técnica, valor probado, resultado esperado) y, si la regresión encontró algo que no coincide con la especificación, qué fue.
-
-`bru` escribe el reporte relativo al directorio de trabajo y no crea carpetas. Apuntarlo a una carpeta que no existe termina con código 2 aunque todo haya pasado.
