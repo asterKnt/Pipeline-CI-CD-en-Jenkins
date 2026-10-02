@@ -1,0 +1,27 @@
+meta {
+  name: DT - PUT incompleto rechazado
+  type: http
+  seq: 11
+}
+
+put {
+  url: {{baseUrl}}/books/1
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "Solo Titulo Incompleto"
+  }
+}
+
+assert {
+  res.status: eq 422
+}
+
+docs {
+  Técnica: Tabla de Decisión (DT) / Regla de Reemplazo Total
+  Valor probado: PUT a recurso existente enviando solo title sin author ni year
+  Resultado esperado: 422 Unprocessable Entity porque PUT exige el modelo completo BookIn.
+}

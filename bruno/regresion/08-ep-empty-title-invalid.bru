@@ -1,0 +1,29 @@
+meta {
+  name: EP - Titulo vacio invalido
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/books
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "",
+    "author": "Autor Anonimo",
+    "year": 2020
+  }
+}
+
+assert {
+  res.status: eq 422
+}
+
+docs {
+  Técnica: Partición de Equivalencia (EP)
+  Valor probado: title = "" (longitud 0, fuera de la clase válida de 1 a 120 caracteres)
+  Resultado esperado: 422 Unprocessable Entity.
+}

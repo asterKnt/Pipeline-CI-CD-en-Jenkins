@@ -1,0 +1,30 @@
+meta {
+  name: BVA - Year por encima del limite superior 2101 invalido
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/books
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "Cronicas del Siglo XXII",
+    "author": "Viajero del Tiempo",
+    "year": 2101,
+    "copies": 1
+  }
+}
+
+assert {
+  res.status: eq 422
+}
+
+docs {
+  Técnica: Análisis de Valores Frontera (BVA)
+  Valor probado: year = 2101 (justo por encima del límite máximo 2100)
+  Resultado esperado: 422 Unprocessable Entity.
+}

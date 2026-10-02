@@ -1,0 +1,31 @@
+meta {
+  name: BVA - Year limite inferior valido 1450
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/books
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "Biblia de Gutenberg",
+    "author": "Johannes Gutenberg",
+    "year": 1450,
+    "copies": 1
+  }
+}
+
+assert {
+  res.status: eq 201
+  res.body.year: eq 1450
+}
+
+docs {
+  Técnica: Análisis de Valores Frontera (BVA)
+  Valor probado: year = 1450 (límite inferior permitido)
+  Resultado esperado: 201 Created y libro persistido exitosamente.
+}

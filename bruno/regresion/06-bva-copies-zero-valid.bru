@@ -1,0 +1,31 @@
+meta {
+  name: BVA - Copies limite inferior valido 0
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/books
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "Edicion Especial Agotada",
+    "author": "Autor Coleccionista",
+    "year": 2024,
+    "copies": 0
+  }
+}
+
+assert {
+  res.status: eq 201
+  res.body.copies: eq 0
+}
+
+docs {
+  Técnica: Análisis de Valores Frontera (BVA)
+  Valor probado: copies = 0 (límite inferior permitido)
+  Resultado esperado: 201 Created con copies en 0.
+}

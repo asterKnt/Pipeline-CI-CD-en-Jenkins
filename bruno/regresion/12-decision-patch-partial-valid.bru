@@ -1,0 +1,29 @@
+meta {
+  name: DT - PATCH parcial aceptado
+  type: http
+  seq: 12
+}
+
+patch {
+  url: {{baseUrl}}/books/1
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "copies": 10
+  }
+}
+
+assert {
+  res.status: eq 200
+  res.body.id: eq 1
+  res.body.copies: eq 10
+}
+
+docs {
+  Técnica: Tabla de Decisión (DT) / Regla de Modificación Parcial
+  Valor probado: PATCH a recurso existente enviando unicamente copies = 10
+  Resultado esperado: 200 OK actualizando solo el campo copies y preservando los demas campos.
+}

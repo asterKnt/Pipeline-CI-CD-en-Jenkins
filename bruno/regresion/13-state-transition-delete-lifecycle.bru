@@ -1,0 +1,21 @@
+meta {
+  name: ST - Eliminar libro activo
+  type: http
+  seq: 13
+}
+
+delete {
+  url: {{baseUrl}}/books/2
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 204
+}
+
+docs {
+  Técnica: Transición de Estados (ST)
+  Valor probado: DELETE /books/2 sobre un libro existente (transición de Estado Activo a Estado Eliminado)
+  Resultado esperado: 204 No Content.
+}

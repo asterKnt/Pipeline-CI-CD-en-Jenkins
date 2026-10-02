@@ -1,0 +1,21 @@
+meta {
+  name: ST - Verificar libro eliminado 404
+  type: http
+  seq: 14
+}
+
+get {
+  url: {{baseUrl}}/books/2
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 404
+}
+
+docs {
+  Técnica: Transición de Estados (ST)
+  Valor probado: GET /books/2 inmediatamente tras la eliminación (verificación del Estado Eliminado)
+  Resultado esperado: 404 Not Found confirmando la transición persistente.
+}

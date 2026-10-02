@@ -1,0 +1,30 @@
+meta {
+  name: BVA - Copies negativo invalido
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/books
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "Inventario Invalido",
+    "author": "Autor Erroneo",
+    "year": 2024,
+    "copies": -1
+  }
+}
+
+assert {
+  res.status: eq 422
+}
+
+docs {
+  Técnica: Análisis de Valores Frontera (BVA)
+  Valor probado: copies = -1 (por debajo del límite mínimo permitido de 0)
+  Resultado esperado: 422 Unprocessable Entity.
+}

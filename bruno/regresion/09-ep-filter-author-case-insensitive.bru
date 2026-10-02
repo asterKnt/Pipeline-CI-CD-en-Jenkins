@@ -1,0 +1,23 @@
+meta {
+  name: EP - Filtro author insensible a mayusculas
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{baseUrl}}/books?author=feathers
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.length: gte 1
+  res.body[0].author: contains Feathers
+}
+
+docs {
+  Técnica: Partición de Equivalencia (EP)
+  Valor probado: author = "feathers" (subcadena en minúsculas frente a "Michael Feathers")
+  Resultado esperado: 200 OK con lista de libros filtrada correctamente.
+}

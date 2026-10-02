@@ -1,0 +1,22 @@
+meta {
+  name: Reset inicial
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/reset
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.status: eq reset
+}
+
+docs {
+  Técnica: Configuración de Entorno (Setup / Baseline)
+  Valor probado: Endpoint /reset
+  Resultado esperado: 200 OK y restablecimiento del estado en memoria a los 3 libros iniciales.
+}

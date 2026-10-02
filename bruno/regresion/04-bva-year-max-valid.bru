@@ -1,0 +1,31 @@
+meta {
+  name: BVA - Year limite superior valido 2100
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/books
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "Computacion Cuantica Futura",
+    "author": "Ada Lovelace",
+    "year": 2100,
+    "copies": 2
+  }
+}
+
+assert {
+  res.status: eq 201
+  res.body.year: eq 2100
+}
+
+docs {
+  Técnica: Análisis de Valores Frontera (BVA)
+  Valor probado: year = 2100 (límite superior permitido)
+  Resultado esperado: 201 Created y libro persistido.
+}

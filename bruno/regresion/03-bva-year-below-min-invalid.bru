@@ -1,0 +1,30 @@
+meta {
+  name: BVA - Year por debajo del limite inferior 1449 invalido
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/books
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "Manuscrito Antiguo",
+    "author": "Desconocido",
+    "year": 1449,
+    "copies": 1
+  }
+}
+
+assert {
+  res.status: eq 422
+}
+
+docs {
+  Técnica: Análisis de Valores Frontera (BVA)
+  Valor probado: year = 1449 (justo por debajo del límite mínimo 1450)
+  Resultado esperado: 422 Unprocessable Entity por validación de esquema.
+}

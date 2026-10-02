@@ -1,0 +1,26 @@
+meta {
+  name: Crear libro valido
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/books
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "Continuous Delivery",
+    "author": "Jez Humble",
+    "year": 2010,
+    "copies": 5
+  }
+}
+
+assert {
+  res.status: eq 201
+  res.body.id: isNumber
+  res.headers["location"]: isDefined
+}

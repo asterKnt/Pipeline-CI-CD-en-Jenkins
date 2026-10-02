@@ -1,0 +1,21 @@
+meta {
+  name: EP - Consulta ID inexistente
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{baseUrl}}/books/99999
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 404
+}
+
+docs {
+  Técnica: Partición de Equivalencia (EP)
+  Valor probado: book_id = 99999 (partición de identificadores no registrados)
+  Resultado esperado: 404 Not Found.
+}
